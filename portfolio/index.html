@@ -1,0 +1,134 @@
+<form action="">
+    <input type="text" class="name">
+    <input type="text" class="mail">
+    <select name="" id="">
+        <h1></h1>
+    </select>
+    <select name="" id=""></select>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+
+</form>
+
+<!-- <dl>
+    <dt>お名前：[username]<span class="redtab">必須</span></dt>
+    <dd>[text* username1 id:username1 class:username1 placeholder "お名前*"]</dd>
+    <br>
+    <dt>メールアドレス：[mail]<span class="redtab">必須</span></dt>
+    <dd>[email* mail id:mail class:mail placeholder "メールアドレス*"]</dd>
+    <br>
+    <dt>面談希望日時（第一希望）：[first_date]</dt>
+    <dd>[date* first_date id:first_date class:first_date]</dd>
+    <br>
+    <dt>面談希望日時（第二希望）：[second_date]</dt>
+    <dd>[date* second_date id:second_date class:second_date]</dd>
+    <br>
+    <dt>入会検討のきっかけや理由：[reason]</dt>
+    <dd>[select* reason id:reason class:reason "マッチングシュミレーションを体験したい" "詳しい説明を聞きたい" "入会したい" "婚活経験者だが、話を聞いてみたい"]</dd>
+    <br>
+    <br>
+    <dt>個人情報取扱い：[acceptance]<span class="redtab">必須</span></dt>
+    <dd>[acceptance acceptance id:acceptance class:acceptance]<a href="https://magazine.photojoy.jp/matching-app/41368/">▼当社個人情報保護方針はこちらからご確認ください（別ページで開きます）</a>[/acceptance]</dd>
+    <br>
+    [submit id:submit class:submit "送信"]
+</dl> -->
+
+<section class="section-contact">
+    <dl class="section-contact_fields">
+        <dt class="section-contact_title">
+            <label for="username" class="required">お名前</label>
+        </dt>
+        <dd class="section-contact_text">
+            [text* username id:username class:username placeholder "お名前"]
+        </dd>
+        <dt class="section-contact_title">
+            <label for="mail" class="required">メールアドレス</label>
+        </dt>
+        <dd class="section-contact_text">
+            [email* mail id:mail class:mail placeholder "メールアドレス"]
+        </dd>
+        <dt class="section-contact_title">
+            <label for="first_date" class="required">面談希望日時（第一希望）</label>
+        </dt>
+        <dd class="section-contact_text date-wrapper">
+            [date* first_date id:first_date class:first_date]
+            [select* first_date_time id:first_date_time class:first_date_time "選択してください" "11:00〜" "13:00〜" "15:00〜"
+            "17:00〜" "19:00〜"]
+        </dd>
+        <dt class="section-contact_title">
+            <label for="second_dat" class="required">面談希望日時（第二希望）</label>
+        </dt>
+        <dd class="section-contact_text date-wrapper">
+            [date* second_date id:second_date class:second_date]
+            [select* second_date_time id:second_date_time class:second_date_time "選択してください" "11:00〜" "13:00〜" "15:00〜"
+            "17:00〜" "19:00〜"]
+        </dd>
+        <dt class="section-contact_title">
+            <label for="reason" class="required">入会検討のきっかけや理由</label>
+        </dt>
+        <dd class="section-contact_text">
+            [select* reason id:reason class:reason "選択してください" "マッチングシュミレーションを体験したい" "詳しい説明を聞きたい" "入会したい"
+            "婚活経験者だが、話を聞いてみたい"]
+        </dd>
+        <dt class="section-contact_title">
+            <label for="acceptance" class="required">個人情報取扱い</label>
+        </dt>
+        <dd class="section-contact_text acceptance-wrapper">
+            [acceptance acceptance id:acceptance class:acceptance]<a
+                href="https://magazine.photojoy.jp/matching-app/41368/">▼当社個人情報保護方針はこちらからご確認ください（別ページで開きます）</a>[/acceptance]
+        </dd>
+    </dl>
+    <div class="section-contact_submit">
+        [submit id:submit class:submit "送信"]
+    </div>
+</section>
+
+<dl class="contact_field">
+    <dt class="contact_field_ttl"><label for="name">お名前（法人名・団体名）<span>*</span></label></dt>
+    <dd class="contact_field_txt">[text* your-name autocomplete:name id:name placeholder "お名前"]</dd>
+</dl>
+<dl class="contact_field">
+    <dt class="contact_field_ttl"><label for="furigana">フリガナ<span>*</span></label></dt>
+    <dd class="contact_field_txt">[text* your-furigana autocomplete:furigana id:furigana placeholder "フリガナ"]</dd>
+</dl>
+<dl class="contact_field">
+    <dt class="contact_field_ttl"><label for="email">メールアドレス<span>*</span></label></dt>
+    <dd class="contact_field_txt">[email* your-email autocomplete:email id:email placeholder "E-mail"]</dd>
+</dl>
+<dl class="contact_field">
+    <dt class="contact_field_ttl"><label for="subject">件名<span>*</span></label></dt>
+    <dd class="contact_field_txt">[text your-subject id:subject placeholder "件名"]</dd>
+</dl>
+<dl class="contact_field">
+    <dt class="contact_field_ttl"><label for="message">お問い合わせ内容<span>*</span></label></dt>
+    <dd class="contact_field_txt">[textarea* your-message id:message placeholder "お問い合わせ内容をご記入してください"]</dd>
+</dl>
+
+<div class="contact_submit">
+    [submit "送信"]
+</div>
+
+<dl class="contact_field">
+    <dt class="contact_field_ttl"><label for="name">お名前（法人名・団体名）</label></dt>
+    <dd class="contact_field_txt">[multiform "your-name"]</dd>
+</dl>
+<dl class="contact_field">
+    <dt class="contact_field_ttl"><label for="furigana">フリガナ</label></dt>
+    <dd class="contact_field_txt">[multiform "your-furigana"]</dd>
+</dl>
+<dl class="contact_field">
+    <dt class="contact_field_ttl"><label for="email">メールアドレス</label></dt>
+    <dd class="contact_field_txt">[multiform "your-email"]</dd>
+</dl>
+<dl class="contact_field">
+    <dt class="contact_field_ttl"><label for="subject">件名</label></dt>
+    <dd class="contact_field_txt">[multiform "your-subject"]</dd>
+</dl>
+<dl class="contact_field">
+    <dt class="contact_field_ttl"><label for="message">お問い合わせ内容</label></dt>
+    <dd class="contact_field_txt">[multiform "your-message"]</dd>
+</dl>
+
+<div class="contact_submit">
+    [previous class:btn-back "戻る"]
+    [submit "送信"]
+</div>

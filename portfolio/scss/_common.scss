@@ -1,0 +1,455 @@
+// 全ページ共通のCSS（基本的な定義や共通のレイアウト）
+
+// ブレイクポイントの定義
+$breakpoints: (
+    "sm": "(max-width: 640px)",
+    "md": "(min-width: 768px)",
+    "lg": "(min-width: 1024px)",
+    "xl": "(min-width: 1920px)"
+);
+// メディアクエリの定義する関数
+@mixin mq($breakpoint: sm) {
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+// フォントサイズrem定義の関数
+$baseFontSize: 16;
+@function rem($pixels) {
+    @return $pixels / $baseFontSize * 1rem;
+}
+
+// 基本定義
+body {
+    font-family: futura-pt, sans-serif;
+    font-weight: 400;
+    scroll-behavior: smooth;
+
+    // カラー定義
+    --txt: #333;
+    // --txt: #212121;
+    --bg: #f5f5f5;
+
+    --green: #7daf14;
+    --mgreen: #c5e386;
+    --lgreen: #f2f7e7;
+    --yellow: #fff6d0;
+    --lyellow: #fffcef;
+    --blue: #37a7db;
+    --lblue: #eaf6fc;
+    --pink: #e676a6;
+    --lpink: #fdf1f6;
+    --lgray: #dbdbdb;
+    --xlgray: #f8f8f8;
+    --lightest-red: #ffeae9;
+    --lighter-red: #ed7776;
+    --light-red: #e95656;
+    --dark-red: #e63f3e;
+    --darker-red: #e0201f;
+    --darkest-red: #c01920;
+}
+
+// 共通定義
+i {
+    font-family: "FontAwesome";
+}
+a {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    &.link {
+        font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
+            Arial, Verdana, sans-serif;
+        color: #333;
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+img {
+    width: 100%;
+    height: 100%;
+    vertical-align: bottom;
+}
+ul {
+    li {
+        list-style: none;
+    }
+}
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    margin: 1em 0;
+    text-align: left;
+    th,
+    td {
+        padding-bottom: 1em;
+    }
+    tr {
+        &:last-child {
+            th,
+            td {
+                padding-bottom: 0;
+                @include mq {
+                    padding-bottom: 1em;
+                }
+            }
+        }
+    }
+    th {
+        width: 30%;
+        @include mq {
+            width: fit-content;
+        }
+        &::before {
+            content: "【";
+        }
+        &::after {
+            content: "】";
+        }
+    }
+}
+p {
+    font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
+        Arial, Verdana, sans-serif;
+    font-size: rem(16);
+    line-height: 1.6;
+}
+.ja {
+    font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
+        Arial, Verdana, sans-serif;
+}
+
+// レスポンシブ表示切り替え
+.pc-only {
+    display: block;
+    @include mq {
+        display: none;
+    }
+}
+.sp-only {
+    display: none;
+    @include mq {
+        display: block;
+    }
+}
+
+// インナー幅
+.inner {
+    width: 100%;
+    max-width: 1130px;
+    padding: rem(50) rem(16);
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+// 各セクションタイトル
+.heading {
+    font-size: rem(64);
+    margin: 0 auto 0.5em;
+    text-align: center;
+    &_ttl {
+        font-weight: 600;
+    }
+    &_txt {
+        font-size: rem(16);
+        margin-top: 1em;
+    }
+}
+
+//ヘッダー
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: rem(80);
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 1em;
+    background: #fff;
+    // box-shadow: 0px 10px 10px -6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    position: fixed;
+    z-index: 99;
+    @include mq {
+        height: rem(64);
+    }
+    h1 {
+        z-index: 99;
+        img {
+            width: rem(48);
+            height: rem(48);
+            @include mq {
+                width: rem(32);
+                height: rem(32);
+            }
+        }
+        &:hover {
+            opacity: 0.6;
+            cursor: pointer;
+        }
+    }
+    // グローバルナビゲーション
+    a {
+        color: #333;
+    }
+    // .heading {
+    //     padding-top: 0.5em;
+    //     margin-bottom: 0;
+    // }
+}
+
+// メイン
+main {
+    margin-top: rem(80);
+    font-size: rem(16);
+    @include mq {
+        margin-top: rem(64);
+    }
+}
+// キービジュアル
+.hero {
+    width: 100vw;
+    height: 40vh;
+    position: relative;
+    @include mq {
+        // height: 50vh;
+    }
+}
+// 共通一覧スタイル
+.gallery {
+    &_list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        @include mq {
+            display: block;
+        }
+        &_item {
+            width: calc(calc(100% / 2) - 16px);
+            @include mq {
+                width: 100%;
+            }
+            &_content {
+                width: 90%;
+                margin: 0 auto;
+                h3 {
+                    font-size: rem(32);
+                    text-align: center;
+                }
+                p {
+                    margin: 1em 0;
+                    a {
+                        &:hover {
+                            text-decoration: none;
+                            opacity: 0.6;
+                        }
+                    }
+                }
+                .link {
+                    color: #333;
+                    width: fit-content;
+                }
+                table {
+                    margin-top: 2em;
+                    // @include mq {
+                    //     th,
+                    //     td {
+                    //         display: block;
+                    //         width: 100%;
+                    //     }
+                    // }
+                }
+            }
+        }
+    }
+}
+// 共通各種詳細スタイル
+.detail {
+    &_container {
+        display: flex;
+        align-items: flex-end;
+        gap: rem(24);
+        @include mq {
+            display: block;
+        }
+        &_left {
+            width: 40%;
+            @include mq {
+                width: 100%;
+            }
+            table {
+                margin: 0 1em;
+                @include mq {
+                    margin: 0;
+                }
+            }
+        }
+        &_right {
+            flex: 1;
+            text-align: left;
+            dl {
+                margin-bottom: 3em;
+                &:last-child {
+                    margin: 0;
+                }
+            }
+            dt {
+                width: 100%;
+                margin-bottom: 0.5em;
+                font-weight: 700;
+                &::before {
+                    content: "【";
+                }
+                &::after {
+                    content: "】";
+                }
+            }
+            dd {
+                line-height: 1.6;
+            }
+        }
+    }
+}
+// Contact
+.contact {
+    &_container {
+        width: 100%;
+        margin: 0 auto;
+        margin-top: 3em;
+    }
+    &_field {
+        width: 100%;
+        margin-bottom: 3em;
+        &_ttl {
+            margin-bottom: 0.5em;
+            label {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            input {
+                font-family: futura-pt, sans-serif;
+            }
+        }
+        &_txt {
+            input,
+            textarea {
+                width: 100%;
+                padding: 0.5em;
+                box-sizing: border-box;
+                font-size: rem(16);
+            }
+            input {
+                font-family: futura-pt, sans-serif;
+            }
+            .wpcf7-not-valid-tip {
+                font-family: futura-pt, sans-serif;
+                margin-top: 0.5em;
+                color: #c01920;
+            }
+        }
+    }
+    &_submit {
+        width: 20vw;
+        margin: 0 auto;
+        position: relative;
+        input {
+            all: unset;
+            width: 100%;
+            padding: 1.5em;
+            box-sizing: border-box;
+            background: #efefef;
+            text-align: center;
+            font-size: 1em;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            &:hover {
+                opacity: 0.6;
+                cursor: pointer;
+                box-shadow: none;
+                transition: box-shadow 0.3s ease;
+            }
+        }
+        .wpcf7-spinner {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0;
+        }
+    }
+    .wpcf7-response-output {
+        border: none !important;
+        border-bottom: 1px solid #333 !important;
+        margin: 3em auto !important;
+        padding: 0 0.5em 0.5em !important;
+        width: fit-content;
+        text-align: center;
+    }
+}
+
+// フッター
+footer {
+    text-align: center;
+    background: #333;
+    color: #fff;
+    padding: 1em 0;
+    font-size: rem(32);
+    a {
+        color: #fff;
+    }
+    .footer {
+        &_list {
+            margin: 1em auto;
+            li {
+                display: inline-block;
+                font-size: rem(24);
+                margin-right: 1em;
+                &:last-child {
+                    margin-right: 0;
+                }
+                a {
+                    display: block;
+                    &:hover {
+                        opacity: 0.6;
+                    }
+                }
+            }
+        }
+    }
+    .recaptcha {
+        a {
+            display: inline-block;
+        }
+        small {
+            display: block;
+        }
+    }
+    p {
+        small {
+            font-size: rem(14);
+        }
+    }
+}
+
+// 各種ページ
+.page {
+    &-top,
+    &-works,
+    &-about,
+    &-contact,
+    &-confirm,
+    &-thanks,
+    &-search,
+    &-404,
+    &-archive,
+    &-single,
+    &-category,
+    &-tag {
+    }
+}
