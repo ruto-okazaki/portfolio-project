@@ -24,7 +24,8 @@ get_header();
         <p>現在、公開されている制作実績はありません。</p>
     <?php endif; ?>
     <?php wp_reset_postdata(); ?>
-
+</section>
+<section class="pagenavi inner" id="js-contents">
     <!-- ページネーション -->
     <?php if (function_exists('wp_pagenavi')) : ?>
         <div class="pagination">

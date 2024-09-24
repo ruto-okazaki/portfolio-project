@@ -9,36 +9,52 @@
         </a>
     </div>
     <div class="gallery_list_item_content">
-        <h3><?php the_title(); ?></h3>
+        <?php
+        $url = get_field('url');
+        $type = get_field('type');
+        $concept = get_field('concept');
+        $range = get_field('range');
+        $skills = get_field('skills');
+        $period = get_field('period');
+        ?>
+        <div class="project-name">
+            <h3><?php the_title(); ?></h3>
+            <a href="<?php echo esc_url($url); ?>" target="_blank" class="link">
+                <?php echo $url; ?>
+            </a>
+        </div>
         <div class="excerpt"><?php the_excerpt(); ?></div>
-        <table>
-            <?php
-            $url = get_field('url');
-            $period = get_field('period');
-            $purpose = get_field('purpose');
-            ?>
-            <?php if ($purpose) : ?>
-                <tr>
-                    <th>サイトの概要</th>
-                    <td><?php echo esc_html($purpose); ?></td>
-                </tr>
+        <div class="content">
+            <?php if ($type) : ?>
+                <dl>
+                    <dt>サイトの分類</dt>
+                    <dd><?php echo $type; ?></dd>
+                </dl>
+            <?php endif; ?>
+            <?php if ($concept) : ?>
+                <dl>
+                    <dt>コンセプト</dt>
+                    <dd><?php echo $concept; ?></dd>
+                </dl>
+            <?php endif; ?>
+            <?php if ($range) : ?>
+                <dl>
+                    <dt>担当範囲</dt>
+                    <dd><?php echo $range; ?></dd>
+                </dl>
+            <?php endif; ?>
+            <?php if ($skills) : ?>
+                <dl>
+                    <dt>使用技術</dt>
+                    <dd><?php echo $skills; ?></dd>
+                </dl>
             <?php endif; ?>
             <?php if ($period) : ?>
-                <tr>
-                    <th>制作期間</th>
-                    <td><?php echo esc_html($period); ?></td>
-                </tr>
+                <dl>
+                    <dt>制作期間</dt>
+                    <dd><?php echo $period; ?></dd>
+                </dl>
             <?php endif; ?>
-            <?php if ($url) : ?>
-                <tr>
-                    <th>URL</th>
-                    <td>
-                        <a href="<?php echo esc_url($url); ?>" target="_blank" class="link">
-                            <?php echo esc_html($url); ?>
-                        </a>
-                    </td>
-                </tr>
-            <?php endif; ?>
-        </table>
+        </div>
     </div>
 </li>

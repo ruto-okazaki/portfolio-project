@@ -86,6 +86,8 @@ table {
     th,
     td {
         padding-bottom: 1em;
+        font-size: rem(14);
+        line-height: 1.4;
     }
     tr {
         &:last-child {
@@ -99,10 +101,7 @@ table {
         }
     }
     th {
-        width: 30%;
-        @include mq {
-            width: fit-content;
-        }
+        width: 10em;
         &::before {
             content: "【";
         }
@@ -110,16 +109,20 @@ table {
             content: "】";
         }
     }
-}
-p {
-    font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
-        Arial, Verdana, sans-serif;
-    font-size: rem(16);
-    line-height: 1.6;
+    td {
+        font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
+            Arial, Verdana, sans-serif;
+    }
 }
 .ja {
     font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
         Arial, Verdana, sans-serif;
+}
+p {
+    font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
+        Arial, Verdana, sans-serif;
+    font-size: rem(14);
+    line-height: 1.4;
 }
 
 // レスポンシブ表示切り替え
@@ -141,24 +144,28 @@ p {
     width: 100%;
     max-width: 1130px;
     padding: rem(50) rem(16);
+    // padding: 0 rem(16);
     box-sizing: border-box;
     margin: 0 auto;
 }
-
+section {
+    // margin: rem(50) 0;
+}
 // 各セクションタイトル
 .heading {
     font-size: rem(64);
-    margin: 0 auto 0.5em;
+    margin: 0 auto;
     text-align: center;
+
     &_ttl {
         font-weight: 600;
+        margin-bottom: rem(16);
     }
     &_txt {
-        font-size: rem(16);
-        margin-top: 1em;
+        font-size: rem(14);
+        line-height: 2;
     }
 }
-
 //ヘッダー
 header {
     display: flex;
@@ -197,10 +204,6 @@ header {
     a {
         color: #333;
     }
-    // .heading {
-    //     padding-top: 0.5em;
-    //     margin-bottom: 0;
-    // }
 }
 
 // メイン
@@ -211,17 +214,43 @@ main {
         margin-top: rem(64);
     }
 }
+
 // キービジュアル
-.hero {
-    width: 100vw;
-    height: 40vh;
-    position: relative;
-    @include mq {
-        // height: 50vh;
+
+// 共通一覧スタイル
+.gallery,
+.detail {
+    dl {
+        display: block;
+        margin-bottom: 1em;
+        font-size: rem(14);
+        font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
+            Arial, Verdana, sans-serif;
+        dt {
+            font-weight: 700;
+            text-indent: -0.5em;
+            margin-bottom: 0.5em;
+            &::before {
+                content: "【";
+            }
+            &::after {
+                content: "】";
+            }
+        }
+        dd,
+        p {
+            line-height: 2;
+        }
+        &:last-child {
+            margin-bottom: 0;
+            @include mq {
+                margin-bottom: 1em;
+            }
+        }
     }
 }
-// 共通一覧スタイル
 .gallery {
+    padding-top: 0;
     &_list {
         display: flex;
         flex-wrap: wrap;
@@ -230,19 +259,28 @@ main {
             display: block;
         }
         &_item {
-            width: calc(calc(100% / 2) - 16px);
+            width: calc(100% / 2);
             @include mq {
                 width: 100%;
             }
             &_content {
                 width: 90%;
                 margin: 0 auto;
-                h3 {
-                    font-size: rem(32);
+                .project-name {
                     text-align: center;
+                    font-size: rem(16);
+                    margin: 1em 0 2em;
+                    h3 {
+                        font-size: rem(32);
+                    }
+                    a {
+                        margin: 1em auto;
+                    }
                 }
                 p {
                     margin: 1em 0;
+                    font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo,
+                        "ＭＳ Ｐゴシック", Arial, Verdana, sans-serif;
                     a {
                         &:hover {
                             text-decoration: none;
@@ -254,15 +292,28 @@ main {
                     color: #333;
                     width: fit-content;
                 }
-                table {
-                    margin-top: 2em;
-                    // @include mq {
-                    //     th,
-                    //     td {
-                    //         display: block;
-                    //         width: 100%;
-                    //     }
-                    // }
+                dl {
+                    display: block;
+                    margin-bottom: 1em;
+                    font-size: rem(14);
+
+                    dt {
+                        font-weight: 700;
+                        text-indent: -0.5em;
+                        margin-bottom: 0.5em;
+                        &::before {
+                            content: "【";
+                        }
+                        &::after {
+                            content: "】";
+                        }
+                    }
+                    dd {
+                        line-height: 2;
+                    }
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
                 }
             }
         }
@@ -270,48 +321,34 @@ main {
 }
 // 共通各種詳細スタイル
 .detail {
+    padding-top: 0;
     &_container {
-        display: flex;
-        align-items: flex-end;
-        gap: rem(24);
-        @include mq {
-            display: block;
-        }
+        display: block;
         &_left {
-            width: 40%;
+            display: flex;
+            align-items: center;
+            width: 100%;
             @include mq {
-                width: 100%;
+                display: block;
             }
-            table {
-                margin: 0 1em;
+            img {
+                width: 70%;
                 @include mq {
-                    margin: 0;
+                    width: 100%;
+                }
+            }
+            .detail_content {
+                // background: #dbdbdb;
+                padding: 2em 1em;
+                box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
+                @include mq {
+                    display: contents;
                 }
             }
         }
         &_right {
             flex: 1;
             text-align: left;
-            dl {
-                margin-bottom: 3em;
-                &:last-child {
-                    margin: 0;
-                }
-            }
-            dt {
-                width: 100%;
-                margin-bottom: 0.5em;
-                font-weight: 700;
-                &::before {
-                    content: "【";
-                }
-                &::after {
-                    content: "】";
-                }
-            }
-            dd {
-                line-height: 1.6;
-            }
         }
     }
 }
@@ -320,7 +357,6 @@ main {
     &_container {
         width: 100%;
         margin: 0 auto;
-        margin-top: 3em;
     }
     &_field {
         width: 100%;
@@ -358,6 +394,9 @@ main {
         width: 20vw;
         margin: 0 auto;
         position: relative;
+        @include mq {
+            width: 50vw;
+        }
         input {
             all: unset;
             width: 100%;

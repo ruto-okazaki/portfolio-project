@@ -4,9 +4,6 @@ get_header();
 ?>
 
 <section class="works slide inner" id="js-contents">
-    <!-- <div class="heading">
-        <h2 class="heading_ttl">Works</h2>
-    </div> -->
     <div class="scrollHint"></div>
     <!-- サブクエリ -->
     <?php $args = array(
@@ -33,6 +30,11 @@ get_header();
     <section class="skills inner" id="js-contents">
         <div class="heading">
             <h2 class="heading_ttl">Skills</h2>
+            <p class="heading_txt">
+                使用可能な言語やツールの一覧です。<br>
+                アイコンをクリックすると、詳細を拡大表示できます。<br>
+                気になるスキルを、以下のアイコンからお選びください。
+            </p>
         </div>
 
         <?php
@@ -42,8 +44,9 @@ get_header();
             'hide_empty' => false,
         ));
         ?>
-        <!-- カテゴリのタブ表示 -->
-        <? if (!empty($custom_categories) && !is_wp_error($custom_categories)) : ?>
+
+        <?php if (!empty($custom_categories) && !is_wp_error($custom_categories)) : ?>
+            <!-- カテゴリのタブ表示 -->
             <ul class="category-switch">
                 <?php foreach ($custom_categories as $index => $category) : ?>
                     <li class="category-switch-tab js-category-switch-tab <?php echo $index === 0 ? 'active' : ''; ?>">
@@ -51,79 +54,65 @@ get_header();
                     </li>
                 <?php endforeach; ?>
             </ul>
+
+            <!-- カテゴリに属する投稿ボタンを表示 -->
+            <?php foreach ($custom_categories as $index => $category) :
+                $args = array(
+                    'post_type' => 'skills',
+                    'tax_query' => array(
+                        array(
+                            'taxonomy' => 'dep',
+                            'field'    => 'slug',
+                            'terms'    => $category->slug,
+                        ),
+                    ),
+                    'posts_per_page' => -1,
+                    'orderby' => 'date',
+                    'order' => 'ASC',
+                );
+                $skills_query = new WP_Query($args);
+            ?>
+
+                <?php if ($skills_query->have_posts()) : ?>
+                    <ul class="skills_btn_list js-list <?php echo $index === 0 ? 'active' : ''; ?>">
+                        <?php foreach ($skills_query->posts as $post) : ?>
+                            <!-- アイコンをクリックでモーダル表示 -->
+                            <li class="skills_btn_list_item js-skills-btn js-modal-btn">
+                                <!-- スキルアイコン -->
+                                <div class="skills_icon">
+                                    <?php echo get_the_post_thumbnail($post->ID); ?>
+                                    <h3><?php echo get_the_title($post->ID); ?></h3>
+                                </div>
+                                <!-- モーダル内コンテンツ -->
+                                <div class="skills_content_list_item js-skills_list_item inner modal">
+                                    <div class="skills_pic">
+                                        <?php echo get_the_post_thumbnail($post->ID); ?>
+                                    </div>
+                                    <div class="skills_content">
+                                        <h3><?php echo get_the_title($post->ID); ?></h3>
+                                        <div class="scroll_container">
+                                            <div class="example">
+                                                <h4>説明</h4>
+                                                <p>
+                                                    <?php the_field('example'); ?>
+                                                </p>
+                                            </div>
+                                            <div class="possible">
+                                                <h4>具体的にできること</h4>
+                                                <p><?php echo apply_filters('the_content', get_post_field('post_content', $post->ID)); ?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal_close-btn"></div>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <div class="modal_over-lay"></div>
+                <?php endif; ?>
+                <?php wp_reset_postdata(); ?>
+            <?php endforeach; ?>
         <?php endif; ?>
-
-        <!-- 初期メッセージ -->
-        <p class="skills_content_list_item inner js-default-message active">
-            使用できる言語、ツールの一覧です。<br>
-            クリックすると、その詳細がこちらに表示されます。<br>
-            以下のアイコンより、気になるスキルをお選びください。
-        </p>
-
-        <?php
-        foreach ($custom_categories as $index => $category) :
-            // 各カテゴリに属する投稿を取得
-            $args = array(
-                'post_type' => 'skills',
-                'tax_query' => array(
-                    array(
-                        'taxonomy' => 'dep',
-                        'field'    => 'slug',
-                        'terms'    => $category->slug,
-                    ),
-                ),
-                'posts_per_page' => -1,
-                'orderby' => 'date',
-                'order' => 'ASC',
-            );
-            $skills_query = new WP_Query($args);
-        ?>
-            <?php if ($skills_query->have_posts()) : ?>
-                <ul class="skills_content_list">
-                    <? foreach ($skills_query->posts as $post_index => $post) : ?>
-                        <li class="skills_content_list_item inner js-skills_list_item">
-                            <div class="skills_pic"><?php echo get_the_post_thumbnail($post->ID); ?></div>
-                            <div class="skills_content">
-                                <h3><?php echo get_the_title($post->ID); ?></h3>
-                                <p><?php echo apply_filters('the_content', get_post_field('post_content', $post->ID)); ?></p>
-                            </div>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif;
-            wp_reset_postdata(); ?>
-        <?php endforeach; ?>
-
-        <!-- カテゴリに属する投稿ボタンを表示 -->
-        <?php
-        foreach ($custom_categories as $index => $category) :
-            $args = array(
-                'post_type' => 'skills',
-                'tax_query' => array(
-                    array(
-                        'taxonomy' => 'dep',
-                        'field'    => 'slug',
-                        'terms'    => $category->slug,
-                    ),
-                ),
-                'posts_per_page' => -1,
-                'orderby' => 'date',
-                'order' => 'ASC',
-            );
-            $skills_query = new WP_Query($args);
-        ?>
-            <?php if ($skills_query->have_posts()) : ?>
-                <ul class="skills_btn_list js-list inner <?php echo $index === 0 ? 'active' : ''; ?>">
-                    <?php foreach ($skills_query->posts as $post_index => $post) : ?>
-                        <li class="skills_btn_list_item js-skills-btn <?php echo $post_index === 0 ? 'active' : ''; ?>">
-                            <?php echo get_the_post_thumbnail($post->ID); ?>
-                            <h3><?php echo get_the_title($post->ID); ?></h3>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif;
-            wp_reset_postdata(); ?>
-        <?php endforeach; ?>
     </section>
 </div>
 
@@ -143,82 +132,131 @@ get_header();
                 ?>
                 <!-- PCレイアウト -->
                 <div class="profile_container pc-only">
-                    <div class="profile_container_left inner">
-                        <div class="profile_detail">
-                            <div class="heading">
-                                <h2 class="heading_ttl">Profile</h2>
-                            </div>
-                            <h3 class="name"><?php the_title(); ?></h3>
-                            <table>
+                    <div class="profile_container_left">
+                        <div class="heading">
+                            <h2 class="heading_ttl">Profile</h2>
+                        </div>
+                        <div class="name">
+                            <h3><?php the_title(); ?></h3>
+                            <ul class="name_sub">
                                 <?php if ($age) : ?>
-                                    <tr>
-                                        <th>生年月日</th>
-                                        <td><?php echo esc_html($age); ?></td>
-                                    </tr>
+                                    <li><?php echo esc_html($age); ?></li>
                                 <?php endif; ?>
                                 <?php if ($from) : ?>
-                                    <tr>
-                                        <th>出身</th>
-                                        <td><?php echo esc_html($from); ?></td>
-                                    </tr>
+                                    <li><?php echo esc_html($from); ?></li>
                                 <?php endif; ?>
-                                <?php if ($hobby) : ?>
-                                    <tr>
-                                        <th>趣味</th>
-                                        <td><?php echo esc_html($hobby); ?></td>
-                                    </tr>
-                                <?php endif; ?>
-                            </table>
-                            <?php the_content(); ?>
+                            </ul>
+                        </div>
+                        <!-- <?php if ($hobby) : ?>
+                            <div class="hobby">
+                                <h4>趣味</h4>
+                                <dl>
+                                    <dt><?php echo esc_html($hobby); ?></dt>
+                                    <dd><?php echo esc_html($hobby); ?></dd>
+                                </dl>
+                            </div>
+                        <?php endif; ?> -->
+                        <div class="scroll_container">
+                            <div class="scroll_arrow"></div>
+                            <div class="appeal">
+                                <div class="hobby">
+                                    <h4>趣味</h4>
+                                    <dl>
+                                        <dt>ファッション</dt>
+                                        <dd>ジャンルはアメカジで、主にレザーやデニムのアイテムが好んでいます。</dd>
+                                        <dt>サブカルチャー</dt>
+                                        <dd>
+                                            エンタメや音楽の鑑賞が大好きで、映画鑑賞・お笑い、音楽は昔のJ-POPや洋楽のロックをよく聴いています。<br>
+                                            また、アメリカの文化や価値観が好きで、憧れがあり、実際に学生時代にロサンゼルスに旅行もしました。
+                                        </dd>
+                                        <dt>バイク</dt>
+                                        <dd>アメリカンタイプのバイクが好きで、実際に学生時代に国産のアメリカンを乗っていました。いつかはハーレーを買うことを目標に日々努力しています。</dd>
+                                        <dt>スキー/スノボ</dt>
+                                        <dd>毎年、必ず行っています。</dd>
+                                    </dl>
+                                </div>
+                                <div class="qualification">
+                                    <h4>資格</h4>
+                                    <ul>
+                                        <li>ITパスポート</li>
+                                        <li>日商簿記検定3級</li>
+                                        <li>普通自動二輪免許/普通自動車免許</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="career"><?php the_content(); ?></div>
                         </div>
                     </div>
                     <div class="profile_container_right">
                         <?php if (has_post_thumbnail()) : ?>
                             <?php the_post_thumbnail(); ?>
                         <?php else: ?>
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/profile_01.png" alt="">
+                            <img src="<?php echo get_template_directory_uri(); ?>/img/profile_01_original.jpg" alt="">
                         <?php endif; ?>
                     </div>
                 </div>
                 <!-- レスポンシブレイアウト -->
                 <div class="profile_container sp-only">
-                    <div class="profile_container_left inner">
-                        <div class="profile_detail">
-                            <div class="heading">
-                                <h2 class="heading_ttl">Profile</h2>
-                            </div>
-                            <h3 class="name"><?php the_title(); ?></h3>
+                    <div class="profile_container_left">
+                        <div class="heading">
+                            <h2 class="heading_ttl">Profile</h2>
                         </div>
-                        <div class="profile_container_right">
-                            <?php if (has_post_thumbnail()) : ?>
-                                <?php the_post_thumbnail(); ?>
-                            <?php else: ?>
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/profile_01.png" alt="">
-                            <?php endif; ?>
+                        <?php if (has_post_thumbnail()) : ?>
+                            <?php the_post_thumbnail(); ?>
+                        <?php else: ?>
+                            <img src="<?php echo get_template_directory_uri(); ?>/img/profile_02.jpg" alt="">
+                        <?php endif; ?>
+                        <div class="name">
+                            <h3><?php the_title(); ?></h3>
+                            <ul class="name_sub">
+                                <?php if ($age) : ?>
+                                    <li><?php echo esc_html($age); ?></li>
+                                <?php endif; ?>
+                                <?php if ($from) : ?>
+                                    <li><?php echo esc_html($from); ?></li>
+                                <?php endif; ?>
+                            </ul>
                         </div>
                     </div>
-                    <div class="inner">
-                        <table>
-                            <?php if ($age) : ?>
-                                <tr>
-                                    <th>生年月日</th>
-                                    <td><?php echo esc_html($age); ?></td>
-                                </tr>
-                            <?php endif; ?>
-                            <?php if ($from) : ?>
-                                <tr>
-                                    <th>出身</th>
-                                    <td><?php echo esc_html($from); ?></td>
-                                </tr>
-                            <?php endif; ?>
-                            <?php if ($hobby) : ?>
-                                <tr>
-                                    <th>趣味</th>
-                                    <td><?php echo esc_html($hobby); ?></td>
-                                </tr>
-                            <?php endif; ?>
-                        </table>
-                        <?php the_content(); ?>
+                    <div class="profile_container_right">
+                        <div class="appeal">
+                            <!-- <?php if ($hobby) : ?>
+                                <div class="hobby">
+                                    <h4>趣味</h4>
+                                    <dl>
+                                        <dt><?php echo esc_html($hobby); ?></dt>
+                                        <dd><?php echo esc_html($hobby); ?></dd>
+                                    </dl>
+                                </div>
+                                <?php endif; ?> -->
+                            <div class="hobby">
+                                <h4>趣味</h4>
+                                <dl>
+                                    <dt>ファッション</dt>
+                                    <dd>ジャンルはアメカジで、主にレザーやデニムのアイテムが好んでいます。</dd>
+                                    <dt>サブカルチャー</dt>
+                                    <dd>
+                                        エンタメや音楽の鑑賞が大好きで、映画鑑賞・お笑い、音楽は昔のJ-POPや洋楽のロックをよく聴いています。<br>
+                                        また、アメリカの文化や価値観が好きで、憧れがあり、実際に学生時代にロサンゼルスに旅行もしました。
+                                    </dd>
+                                    <dt>バイク</dt>
+                                    <dd>アメリカンタイプのバイクが好きで、実際に学生時代に国産のアメリカンを乗っていました。いつかはハーレーを買うことを目標に日々努力しています。</dd>
+                                    <dt>スキー/スノボ</dt>
+                                    <dd>毎年、必ず行っています。</dd>
+                                </dl>
+                            </div>
+                            <div class="qualification">
+                                <h4>資格</h4>
+                                <ul>
+                                    <li>ITパスポート</li>
+                                    <li>日商簿記検定3級</li>
+                                    <li>普通自動二輪免許/普通自動車免許</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="career"><?php the_content(); ?></div>
                     </div>
                 </div>
         <?php endwhile;
@@ -232,8 +270,8 @@ get_header();
         <div class="heading">
             <h2 class="heading_ttl">Contact</h2>
             <p class="heading_txt">
-                お問い合わせを随時、受け付けております。<br>
-                こちらからお問い合わせお願いします。
+                お問い合わせは随時受け付けております。<br>
+                こちらからお気軽にお問い合わせください。
             </p>
         </div>
         <div class="contact_container">
@@ -246,8 +284,8 @@ get_header();
     <div class="heading">
         <h2 class="heading_ttl">Thank you</h2>
         <p class="heading_txt">
-            最後まで、私のポートフォリオをご覧いただき、誠にありがとうございます。<br>
-            お問い合わせにつきましては、下記のボタンより、フォームございますのでそちらよりお願いします。
+            最後まで私のポートフォリオをご覧いただき、誠にありがとうございます。<br>
+            お問い合わせは、下記のボタンからフォームへアクセスいただけますので、そちらよりお願いいたします。
         </p>
     </div>
     <p class="btn">

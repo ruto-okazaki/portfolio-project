@@ -63,22 +63,6 @@ window.onpageshow = function (event) {
     });
 }
 
-// アコーディオン
-// {
-//     const dts = document.querySelectorAll('.js-dt');
-//     dts.forEach(dt => {
-//         dt.addEventListener('click', () => {
-//             dt.parentNode.classList.toggle('open');
-//             // ひとつの開くと他は閉じる
-//             dts.forEach(el => {
-//                 if (dt !== el) {
-//                     el.parentNode.classList.remove('open');
-//                 }
-//             });
-//         });
-//     });
-// }
-
 // タブの切り替え
 // {
 //     const tabLists = document.querySelectorAll('.feature_list_tab li');
@@ -209,49 +193,7 @@ window.onpageshow = function (event) {
 // }
 
 // ここからjQuery
-// モーダル
-// $(function () {
-//     $('.modal_open').on('click', function () {
-//         $('.modal, .modal_over-lay').addClass('active');
-//         $('.modal').append("<img src=" + $(this).children('img').attr("src") + ">");
-//     });
-
-//     $('.modal_close-btn, .modal_over-lay').on('click', function () {
-//         $('.modal').children('img').remove();
-//         $('.modal, .modal_over-lay').removeClass('active');
-//     });
-// });
-
-// $('.modal_open').each(function () {
-//     $(this).on('click', function () { // ←「.modal_open」の1つ1つに対してイベント設定
-//         $(this).parent().find('.modal').addClass('active'); // クリックされた要素自身の親要素の中にある「.modal」にクラス名を追加
-//         $('.modal_over-lay').addClass('active');
-//     });
-// });
-
-// $('.modal_close-btn').each(function () {
-//     $(this).on('click', function () {
-//         $('.modal').removeClass('active');
-//         $('.modal_over-lay').removeClass('active');
-//     });
-// });
-
-// $('.modal_over-lay').on('click', function () {
-//     $('.modal').each(function () {
-//         $(this).removeClass('active');
-//         $('.modal_over-lay').removeClass('active');
-//     });
-// });
-
-// スキルカテゴリタブ
-// (() => {
-//     const $doc = document;
-//     const $tab = document.getElementById()
-//     const $category = $tab.querySelectorAll('[data-category]');
-//     const $content = $tab.querySelectorAll('[data-content]');
-// })();
-
-// スキルカテゴリ一覧
+// スキルカテゴリ一覧（タブの切り替え）
 $(function () {
     $('.js-category-switch-tab').on('click', function () {
         $('.js-category-switch-tab, .js-list').removeClass('active');
@@ -262,13 +204,36 @@ $(function () {
     });
 });
 
-// スキル一覧（タブの切り替え）
+// スキル一覧 (クリックで詳細表示)
+// $(function () {
+//     $('.js-skills-btn').on('click', function () {
+//         $('.js-skills-btn, .js-skills_list_item').removeClass('active');
+//         $(this).addClass('active');
+
+//         // var index = $('.js-skills-btn').index(this);
+//         // $('.js-skills_list_item').eq(index).addClass('active');
+//     });
+// });
+
+// スキル一覧 (クリックで詳細表示)
 $(function () {
     $('.js-skills-btn').on('click', function () {
-        $('.js-skills-btn, .js-skills_list_item, .js-default-message').removeClass('active');
+        $('.js-skills-btn').removeClass('active');
         $(this).addClass('active');
+    });
+});
 
-        var index = $('.js-skills-btn').index(this);
-        $('.js-skills_list_item').eq(index).addClass('active');
+// モーダル
+$(function () {
+    $('.js-modal-btn').on('click', function () {
+        $('.modal, .modal_over-lay').removeClass('active');
+        // クリックされた要素の子要素のモーダルに 'active' クラスを追加
+        $(this).find('.modal').addClass('active');
+        $('.modal_over-lay').addClass('active');
+    });
+    // モーダルとオーバーレイの閉じるボタンのクリックイベント
+    $(document).on('click', '.modal_close-btn, .modal_over-lay', function () {
+        $('.modal.active, .modal_over-lay.active').removeClass('active');
+        $('.js-skills-btn').removeClass('active');
     });
 });

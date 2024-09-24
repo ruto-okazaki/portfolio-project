@@ -6,8 +6,8 @@
         <?php else : ?>
             <img src="<?php echo get_template_directory_uri(); ?>/img/dummy.png" alt="">
         <?php endif; ?>
-        <div class="mask_container mask_container-scale">
-            <div class="mask_content">
+        <div class="mask_container">
+            <div class="mask_content inner">
                 <h3><?php the_title(); ?></h3>
                 <div class="excerpt"><?php the_excerpt(); ?></div>
             </div>
