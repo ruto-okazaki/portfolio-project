@@ -217,36 +217,6 @@ function cpt_register_profile()
 }
 add_action('init', 'cpt_register_profile');
 
-// アーカイブ用テンプレート
-// function cpt_register_gallery()
-// {
-//     $labels = [
-//         "name" => "ギャラリー",
-//         "singular_name" => "ギャラリー",
-//         "edit_item" => "ギャラリーを編集",
-//         "add_new_item" => "ギャラリーを追加",
-//     ];
-//     $args = [
-//         "label" => "ギャラリー",
-//         "labels" => $labels,
-//         "description" => "",
-//         "public" => true,
-//         "show_in_rest" => true,
-//         "rest_base" => "",
-//         "rest_controller_class" => "WP_REST_Posts_Controller",
-//         "has_archive" => true,
-//         "delete_with_user" => false,
-//         "exclude_from_search" => false,
-//         "map_meta_cap" => true,
-//         "rewrite" => ["slug" => "gallery", "with_front" => true],
-//         "query_var" => true,
-//         "menu_position" => 11,
-//         "supports" => ["title", "editor", "thumbnail"],
-//     ];
-//     register_post_type("gallery", $args);
-// }
-// add_action('init', 'cpt_register_gallery');
-
 // 投稿数設定
 function column_posts($query)
 {

@@ -365,7 +365,7 @@ main {
 .gallery dl,
 .detail dl {
   display: block;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
   font-size: 0.875rem;
   font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", Arial, Verdana, sans-serif;
 }
@@ -1236,6 +1236,18 @@ footer p small {
   width: fit-content;
   margin: 0 auto;
 }
+.wp-pagenavi a,
+.wp-pagenavi span {
+  color: #333;
+}
+.wp-pagenavi a:hover,
+.wp-pagenavi span:hover {
+  opacity: 0.6;
+}
+.wp-pagenavi a.pages:hover,
+.wp-pagenavi span.pages:hover {
+  opacity: 1;
+}
 
 .breadcrumb .inner {
   display: flex;
@@ -1248,6 +1260,12 @@ footer p small {
 }
 .breadcrumb .inner a {
   color: #333;
+}
+.breadcrumb .inner span:hover {
+  opacity: 0.6;
+}
+.breadcrumb .inner .current-item {
+  cursor: pointer;
 }
 
 @media (max-width: 640px) {
@@ -1315,7 +1333,6 @@ footer p small {
   transition: transform 0.5s ease;
 }
 .page-top .skills_btn_list_item:hover, .page-top .skills_btn_list_item.active {
-  background-color: #f8f8f8;
   background-color: #efefef;
   transition: background-color 0.5s ease;
   cursor: pointer;
@@ -1472,7 +1489,12 @@ footer p small {
 .page-top .profile_container .appeal {
   font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", Arial, Verdana, sans-serif;
   font-size: 0.875rem;
-  line-height: 1.4;
+  line-height: 1.6;
+}
+@media (max-width: 640px) {
+  .page-top .profile_container .appeal {
+    line-height: 2;
+  }
 }
 .page-top .profile_container .appeal h4 {
   text-indent: -0.5em;
@@ -1497,7 +1519,13 @@ footer p small {
 }
 .page-top .profile_container .career p {
   margin: 1em 0;
+  line-height: 1.6;
   font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", Arial, Verdana, sans-serif;
+}
+@media (max-width: 640px) {
+  .page-top .profile_container .career p {
+    line-height: 2;
+  }
 }
 .page-top .profile_container_left {
   line-height: 1.4;

@@ -84,7 +84,6 @@
     width: 25vw;
     margin: rem(50) auto 0;
     border: 1px solid #333;
-    // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
     position: relative;
     transition: box-shadow 0.3s ease;
@@ -294,7 +293,6 @@
     }
     &.inner {
         max-width: 100%;
-        // padding: rem(50) 0;
         padding: 0 0 rem(50);
     }
     /* スクロールヒント */
@@ -366,10 +364,6 @@
         -webkit-transition: all 0.5s ease;
         transition: all 0.5s ease;
         cursor: pointer;
-        // &-scale {
-        //     -webkit-transform: scale(0);
-        //     transform: scale(0);
-        // }
     }
     &_content {
         position: absolute;
@@ -400,10 +394,6 @@
                 opacity: 1;
                 -webkit-transition: all 0.5s ease;
                 transition: all 0.5s ease;
-                // &-scale {
-                //     -webkit-transform: scale(1);
-                //     transform: scale(1);
-                // }
             }
         }
     }
@@ -414,15 +404,12 @@
     width: 100%;
     height: auto;
     position: fixed;
-    // top: 50%;
-    // transform: translateY(-50%);
     top: 10vw;
     left: 0;
     right: 0;
     margin: 0 auto;
     z-index: 200;
     cursor: default;
-    // display: none;
     opacity: 0;
     visibility: hidden;
     transition:
@@ -435,11 +422,9 @@
     &.inner {
         @include mq {
             width: calc(100% - 2em);
-            // padding-top: 0;
         }
     }
     &.active {
-        // display: block;
         opacity: 1;
         visibility: visible;
         transition:
@@ -455,14 +440,12 @@
         background: rgba(0, 0, 0, 0.05);
         z-index: 100;
         cursor: pointer;
-        // display: none;
         opacity: 0;
         visibility: hidden;
         transition:
             opacity 0.3s ease,
             visibility 0.3s ease;
         &.active {
-            // display: block;
             opacity: 1;
             visibility: visible;
             transition:
@@ -481,13 +464,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        // background: #333;
-        // color: #fff;
-        // box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
-        // box-shadow: 0 7px 10px rgb(0 0 0 / 10%);
-        // box-shadow:
-        //     inset 15px 30px 40px rgba(255, 255, 255, 0.5),
-        //     0 3px 7px rgba(0, 0, 0, 0.2);
         cursor: pointer;
         @include mq {
             top: rem(8);
@@ -511,9 +487,6 @@
             transform: translate(-50%, -50%) rotate(-45deg);
         }
         &:hover {
-            // background: #fff;
-            // border: 1px solid #333;
-
             &::before,
             &::after {
                 background: #333;
@@ -607,40 +580,24 @@
     }
 }
 
-// 検索バー
-// .search {
-//     font-size: rem(16);
-//     @include mq {
-//         position: absolute;
-//         right: 15vw;
-//         z-index: 99;
-//     }
-//     input {
-//         padding: 0.5em;
-//         border: transparent solid 1px;
-//         border-radius: 0.5em;
-//         position: relative;
-//         cursor: pointer;
-//         background: url(../img/search.svg) no-repeat right 0.5em center;
-//         width: 1rem;
-//         transition: width, border-color;
-//         transition-duration: 0.4s;
-//         &:focus {
-//             border: #333 solid 1px;
-//             width: 20em;
-//             @include mq {
-//                 width: 15em;
-//             }
-//         }
-//     }
-// }
-
 // プラグイン
 // ページナビゲーション
 .wp-pagenavi {
     display: flex;
     width: fit-content;
     margin: 0 auto;
+    a,
+    span {
+        color: #333;
+        &:hover {
+            opacity: 0.6;
+        }
+        &.pages {
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
 }
 // パンくずリスト
 .breadcrumb {
@@ -655,9 +612,13 @@
         a {
             color: #333;
         }
+        span {
+            &:hover {
+                opacity: 0.6;
+            }
+        }
+        .current-item {
+            cursor: pointer;
+        }
     }
 }
-// Recaptcha
-// .grecaptcha-badge {
-//     bottom: 80px !important;
-// }

@@ -147,15 +147,6 @@ get_header();
                                 <?php endif; ?>
                             </ul>
                         </div>
-                        <!-- <?php if ($hobby) : ?>
-                            <div class="hobby">
-                                <h4>趣味</h4>
-                                <dl>
-                                    <dt><?php echo esc_html($hobby); ?></dt>
-                                    <dd><?php echo esc_html($hobby); ?></dd>
-                                </dl>
-                            </div>
-                        <?php endif; ?> -->
                         <div class="scroll_container">
                             <div class="scroll_arrow"></div>
                             <div class="appeal">
@@ -221,15 +212,6 @@ get_header();
                     </div>
                     <div class="profile_container_right">
                         <div class="appeal">
-                            <!-- <?php if ($hobby) : ?>
-                                <div class="hobby">
-                                    <h4>趣味</h4>
-                                    <dl>
-                                        <dt><?php echo esc_html($hobby); ?></dt>
-                                        <dd><?php echo esc_html($hobby); ?></dd>
-                                    </dl>
-                                </div>
-                                <?php endif; ?> -->
                             <div class="hobby">
                                 <h4>趣味</h4>
                                 <dl>
@@ -264,21 +246,6 @@ get_header();
         wp_reset_postdata(); ?>
     </section>
 </div>
-
-<!-- <div id="contact inner" id="js-contents">
-    <section class="inner contact js-contents">
-        <div class="heading">
-            <h2 class="heading_ttl">Contact</h2>
-            <p class="heading_txt">
-                お問い合わせは随時受け付けております。<br>
-                こちらからお気軽にお問い合わせください。
-            </p>
-        </div>
-        <div class="contact_container">
-            <?php echo do_shortcode('[contact-form-7 id="19c2f38" title="CONTACT"]'); ?>
-        </div>
-    </section>
-</div> -->
 
 <section class="thank-you inner" id="js-contents">
     <div class="heading">

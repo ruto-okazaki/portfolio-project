@@ -112,9 +112,9 @@ $class = get_page_class();
             <?php elseif (is_post_type_archive('works')) : ?>
                 <h2 class="heading_ttl">Works</h2>
                 <p class="heading_txt">
-                    「VIEW ALL」からは、制作の経緯やこだわり、期間など、より詳細な情報をご覧いただけます。<br>
-                    ぜひご参考にしていただけると幸いです。<br>
-                    また、サムネイル画像をクリックすると、各サイトの詳細ページへアクセスできます。
+                    サムネイル画像をクリックすると、各サイトの詳細ページへアクセスできます。<br>
+                    詳細ページでは、制作の経緯やこだわり、期間など、より詳細な情報をご覧いただけます。<br>
+                    ぜひご参考にしていただけると幸いです。
                 </p>
 
             <?php elseif (is_singular('works')) : ?>

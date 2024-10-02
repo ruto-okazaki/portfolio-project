@@ -144,13 +144,10 @@ p {
     width: 100%;
     max-width: 1130px;
     padding: rem(50) rem(16);
-    // padding: 0 rem(16);
     box-sizing: border-box;
     margin: 0 auto;
 }
-section {
-    // margin: rem(50) 0;
-}
+
 // 各セクションタイトル
 .heading {
     font-size: rem(64);
@@ -222,7 +219,7 @@ main {
 .detail {
     dl {
         display: block;
-        margin-bottom: 1em;
+        margin-bottom: 2em;
         font-size: rem(14);
         font-family: Helvetica, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
             Arial, Verdana, sans-serif;
@@ -338,7 +335,6 @@ main {
                 }
             }
             .detail_content {
-                // background: #dbdbdb;
                 padding: 2em 1em;
                 box-shadow: 0px 10px 80px rgba(0, 0, 0, 0.1);
                 @include mq {
@@ -473,22 +469,5 @@ footer {
         small {
             font-size: rem(14);
         }
-    }
-}
-
-// 各種ページ
-.page {
-    &-top,
-    &-works,
-    &-about,
-    &-contact,
-    &-confirm,
-    &-thanks,
-    &-search,
-    &-404,
-    &-archive,
-    &-single,
-    &-category,
-    &-tag {
     }
 }
